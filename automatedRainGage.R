@@ -18,7 +18,7 @@ colnames(d) <- c('dateTime', 'pulse') # Rename the column headers.
 
 d$dateTime <- as.POSIXct(d$dateTime) # Teach R that this is a date/time column. This seems to come in the right way automatically, but just in case we have this line.
 
-d$precip.mm <- d$pulse * 0.01 * 25.4 # 0.1 inches of precip / pulse; 25.4 mm of water / inch.
+d$precip.mm <- d$pulse * 0.01 * 25.4 # 0.1 inches of precipitation / pulse; 25.4 mm of water / inch.
 
 #####
 
