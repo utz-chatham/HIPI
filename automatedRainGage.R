@@ -24,18 +24,30 @@ d$date <- as.Date(d$dateTime) # Create a field that is just the date.
 
 #####
 
-##### Integrate the new data into the master rainfall data file
+##### Integrate the new data into the master rainfall data file + send the new file into the archive folder.
 
-dAll <- read.csv('mainPrecip.csv')
+dAll <- read.csv('mainPrecip.csv') # Read in the master precipitation file.
 
-dAll$dateTime <- as.POSIXct(dAll$dateTime, format = '%m/%d/%Y %H:%M')
+dAll$dateTime <- as.POSIXct(dAll$dateTime, format = '%m/%d/%Y %H:%M') # Format the dates / times in the above so R recognizes them for what they are. 
 
-dAll$date <- as.Date(dAll$date, format = '%m/%d/%Y')
+dAll$date <- as.Date(dAll$date, format = '%m/%d/%Y') # Format the dates in the above so R recognizes them for what they are. 
 
-dAll <- rbind(dAll, d)
+dAll <- rbind(dAll, d) # Bind the two data frames. 
 
-dAll[(duplicated(dAll)),]
+dupRows <- which(duplicated(dAll)) # Identify which, if any, rows are duplicated. 
 
+if (length(dupRows) != 0) {
+  print(paste('Heads up: there are', length(dupRows), 'duplicate rows in master precipitation data frame. This is not a problem if you downloaded previously archived readings. These will be removed before archiving the new data.' ))
+  
+  dAll <- dAll[-dupRows, ] # Remove these duplicate rows.
+}
+
+write.csv(dAll, 'mainPrecip.csv', row.names = F) # Overwrite the master precipitation data file with the formerly archived + new data. Removing the row names is important here! These are useless integers R automatically puts into every data frame.
+
+file.rename(paste(fileName,'.xls',sep=''), paste(getwd(),'/archivedPrecip/',paste(fileName,'.xls',sep=''),sep='')) # This takes the 
+
+
+#####
 
 ##### Plot the data 
 
@@ -43,7 +55,7 @@ dAll[(duplicated(dAll)),]
 
 library(ggplot2)
 
-dDailyPrecip <- data.frame(aggregate(data=d, precip.mm~date, sum))
+dDailyPrecip <- data.frame(aggregate(data=dAll, precip.mm~date, sum))
 
 ggplot(dDailyPrecip, aes(x=date, y=precip.mm) )+
   geom_col(color='black', fill='gray80')+
