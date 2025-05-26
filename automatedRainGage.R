@@ -10,14 +10,14 @@ fileName <- 'test' # Place the file name here. No need for the extension.
 
 ##### 
 
-##### Import and clean up the data.
+##### Import and clean up the data. 
 
 if (studentOrProf == 'prof') {
 setwd(paste("C:/Users/", userName, "/OneDrive - Chatham University/NSFEmbrace/dataFiles", sep='')) 
   }
 
 if (studentOrProf == 'student'){
-  setwd(paste("C:/Users/", userName, "/OneDrive - Chatham University/Jill Riddell - /NSFEmbrace/dataFiles", sep=''))
+  setwd(paste("C:/Users/", userName, "/OneDrive - Chatham University/Jill Riddell - NSFEmbrace/dataFiles", sep=''))
 }
 
 d <- readxl::read_excel(paste(fileName,'.xls', sep=''), skip=2) # There are two useless lines that the data recorder includes, which explains the "skip=" argument. 
