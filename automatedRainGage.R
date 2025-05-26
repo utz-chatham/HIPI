@@ -40,7 +40,7 @@ dAll <- read.csv('mainPrecip.csv') # Read in the master precipitation file.
 
 dAll$dateTime <- as.POSIXct(dAll$dateTime, format = '%Y-%m-%d %H:%M:%S') # Format the dates / times in the above so R recognizes them for what they are. 
 
-dAll$date <- as.Date(dAll$date, format = '%m/%d/%Y') # Format the dates in the above so R recognizes them for what they are. 
+dAll$date <- as.Date(dAll$date, format = '%Y-%m-%d') # Format the dates in the above so R recognizes them for what they are. 
 
 dAll <- rbind(dAll, d) # Bind the two data frames. 
 
