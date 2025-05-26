@@ -1,14 +1,16 @@
-##### Set the working directory. If you are on a PC, it may be that the only thing you need to adjust below is the user name. 
+##### Set up the basics. If you are on a PC, it may be that the only thing you need to adjust below is the user name for the working directory. 
 
-userName <- 'utzry' 
+technician <- 'Ryan Utz' # Put your name here.
 
-setwd(paste("C:/Users/", userName, "/OneDrive - Chatham University/NSFEmbrace/dataFiles", sep=''))
+userName <- 'utzry' # Put your computer's name here.
+
+fileName <- 'test' # Place the file name here. No need for the extension. 
 
 #####
 
 ##### Import and clean up the data.
 
-fileName <- 'test' # Place the file name here. No need for the extension. 
+setwd(paste("C:/Users/", userName, "/OneDrive - Chatham University/NSFEmbrace/dataFiles", sep=''))
 
 d <- readxl::read_excel(paste(fileName,'.xls', sep=''), skip=2) # There are two useless lines that the data recorder includes, which explains the "skip=" argument. 
 
@@ -44,12 +46,23 @@ if (length(dupRows) != 0) {
 
 write.csv(dAll, 'mainPrecip.csv', row.names = F) # Overwrite the master precipitation data file with the formerly archived + new data. Removing the row names is important here! These are useless integers R automatically puts into every data frame.
 
-file.rename(paste(fileName,'.xls',sep=''), paste(getwd(),'/archivedPrecip/',paste(fileName,'.xls',sep=''),sep='')) # This takes the 
+file.rename(paste(fileName,'.xls',sep=''), paste(getwd(),'/archivedPrecip/',paste(fileName,'.xls',sep=''),sep='')) # This takes the file that was just integrated into the master file and plunks it into the archive file. 
 
+# Archiving the data collection:
+
+archiveLine <- data.frame(name=technician, file=fileName, date=Sys.Date()) 
+
+archives <- read.delim('historyPrecip.txt', sep = " ") # Pull in the data records.
+
+archives <- rbind(archives, archiveLine) # Bind the new one with the old one.
+ 
+write.table(archiveLine, 'historyPrecip.txt', row.names=F) # Write the updated archives.
+
+#
 
 #####
 
-##### Plot the data 
+##### (optional) Plot the data 
 
 # Daily plot
 
