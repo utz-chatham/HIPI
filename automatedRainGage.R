@@ -17,7 +17,7 @@ setwd(paste("C:/Users/", userName, "/OneDrive - Chatham University/NSFEmbrace/da
   }
 
 if (studentOrProf == 'student'){
-  setwd(paste("C:/Users/", userName, "/OneDrive - Chatham University/Jill Riddell - NSFEmbrace/dataFiles", sep=''))
+  setwd(paste("C:/Users/", userName, "/Chatham University/Jill Riddell - NSFEmbrace/dataFiles", sep=''))
 }
 
 d <- readxl::read_excel(paste(fileName,'.xls', sep=''), skip=2) # There are two useless lines that the data recorder includes, which explains the "skip=" argument. 
