@@ -6,7 +6,7 @@ userName <- 'rutz' # Put your computer's name here.
 
 studentOrProf <- 'prof' # type here "student" or "prof" depending on who you are.
 
-fileName <- 'test' # Place the file name here. No need for the extension. 
+fileName <- '5G106743 26May25-1108' # Place the file name here. No need for the extension. 
 
 ##### 
 
@@ -38,7 +38,7 @@ d$date <- as.Date(d$dateTime) # Create a field that is just the date.
 
 dAll <- read.csv('mainPrecip.csv') # Read in the master precipitation file.
 
-dAll$dateTime <- as.POSIXct(dAll$dateTime, format = '%m/%d/%Y %H:%M') # Format the dates / times in the above so R recognizes them for what they are. 
+dAll$dateTime <- as.POSIXct(dAll$dateTime, format = '%Y-%m-%d %H:%M:%S') # Format the dates / times in the above so R recognizes them for what they are. 
 
 dAll$date <- as.Date(dAll$date, format = '%m/%d/%Y') # Format the dates in the above so R recognizes them for what they are. 
 
