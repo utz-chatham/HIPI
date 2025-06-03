@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 HIPI.Rproj
+.gitignore
+HIPI.Rproj
